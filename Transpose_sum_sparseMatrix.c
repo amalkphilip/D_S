@@ -117,10 +117,17 @@ printf("THE SUM OF SPARSE MATRIX .....\n");
 for(int h=0;h<s;h++){
 	printf("%d\t%d\t%d\n",add[h][0],add[h][1],add[h][2]);
 }
+int trans;
+
+for(int h=0;h<s;h++){
+	trans=add[h][0];
+	add[h][0]=add[h][1];
+	add[h][1]=trans;
+}
 
 printf("TRANSPOSE....\n");
 for(int h=0;h<s;h++){
-	printf("%d\t%d\t%d\n",add[h][1],add[h][0],add[h][2]);
+    printf("%d\t%d\t%d\n",add[h][0],add[h][1],add[h][2]);
 }
 
 return 0;
