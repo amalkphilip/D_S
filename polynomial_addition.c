@@ -64,5 +64,4 @@ int main(){
     if(a<k-1){
     printf("+"); }
     }
-  return 0;
-}
+  return 0; }
