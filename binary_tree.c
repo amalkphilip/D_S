@@ -2,35 +2,26 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-
 #define MAX 100
-
-
 char stack_op[MAX];
 int top_op = -1;
-
 void push_op(char c) {
     stack_op[++top_op] = c;
 }
-
 char pop_op() {
     return stack_op[top_op--];
 }
-
 char peek_op() {
     return stack_op[top_op];
 }
-
 int isEmpty_op() {
     return top_op == -1;
 }
-
 int precedence(char c) {
     if(c == '+' || c == '-') return 1;
     if(c == '*' || c == '/') return 2;
     return 0;
 }
-
 void infixToPostfix(char* infix, char* postfix) {
     int i, k=0;
     char c;
@@ -62,22 +53,17 @@ typedef struct Node {
     struct Node* left;
     struct Node* right;
 } Node;
-
 typedef struct StackNode {
     Node* treeNode;
     struct StackNode* next;
 } StackNode;
-
-
 StackNode* top_tree = NULL;
-
 void push_tree(Node* node) {
     StackNode* newNode = (StackNode*) malloc(sizeof(StackNode));
     newNode->treeNode = node;
     newNode->next = top_tree;
     top_tree = newNode;
 }
-
 Node* pop_tree() {
     if(top_tree == NULL) return NULL;
     StackNode* temp = top_tree;
@@ -86,7 +72,6 @@ Node* pop_tree() {
     free(temp);
     return res;
 }
-
 Node* createNode(char c) {
     Node* newNode = (Node*) malloc(sizeof(Node));
     newNode->data = c;
@@ -113,40 +98,29 @@ Node* buildTree(char* postfix) {
     }
     return pop_tree();
 }
-
-
 void preorder(Node* root) {
     if(root == NULL) return;
     printf("%c", root->data);
     preorder(root->left);
     preorder(root->right);
 }
-
 void postorder(Node* root) {
     if(root == NULL) return;
     postorder(root->left);
     postorder(root->right);
     printf("%c", root->data);
 }
-
 int main() {
     char infix[MAX], postfix[MAX];
     printf("Enter infix expression: ");
     scanf("%s", infix);
-
     infixToPostfix(infix, postfix);
- 
-
     Node* root = buildTree(postfix);
-	
     printf("Prefix: ");
     preorder(root);
     printf("\n");
-
     printf("Postfix: ");
     postorder(root);
     printf("\n");
-
     return 0;
 }
-
