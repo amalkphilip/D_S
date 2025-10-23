@@ -7,7 +7,6 @@ typedef struct Node {
     struct Node* right;
 } Node;
 
-
 Node* createNode(int key) {
     Node* newNode = (Node*) malloc(sizeof(Node));
     if (!newNode) {
@@ -19,7 +18,6 @@ Node* createNode(int key) {
     return newNode;
 }
 
-
 Node* insert(Node* root, int key) {
     if (root == NULL)
         return createNode(key);
@@ -30,14 +28,12 @@ Node* insert(Node* root, int key) {
         root->right = insert(root->right, key);
     else
         printf("Key %d already exists. Skipping insert.\n", key);
-
     return root;
 }
 
 Node* search(Node* root, int key) {
     if (root == NULL || root->key == key)
         return root;
-
     if (key < root->key)
         return search(root->left, key);
     else
@@ -51,16 +47,13 @@ Node* minValueNode(Node* node) {
     return current;
 }
 
-
 Node* deleteNode(Node* root, int key) {
     if (root == NULL) return root;
-
     if (key < root->key)
         root->left = deleteNode(root->left, key);
     else if (key > root->key)
         root->right = deleteNode(root->right, key);
     else {
-        
         if (root->left == NULL) {
             Node* temp = root->right;
             free(root);
@@ -78,14 +71,10 @@ Node* deleteNode(Node* root, int key) {
     return root;
 }
 
-
-
 int main() {
     Node* root = NULL;
     int choice, key;
-
     printf("Binary Search Tree operations:\n");
-
     while (1) {
         printf("\nMenu:\n");
         printf("1. Insert into the stack\n2. Search from the stack\n3. Delete an element from the stack\n4. Exit\n");
@@ -100,7 +89,6 @@ int main() {
                 printf("Enter number to insert: ");
                 if(scanf("%d", &key) != 1) {
                     printf("Invalid input.\n");
-                    
                     while(getchar() != '\n');
                     break;
                 }
@@ -121,7 +109,6 @@ int main() {
                 else
                     printf("Key %d not found.\n", key);
                 break;
-
             case 3:
                 printf("Enter number to delete: ");
                 if(scanf("%d", &key) != 1) {
@@ -132,16 +119,12 @@ int main() {
                 root = deleteNode(root, key);
                 printf("If key existed, %d deleted.\n", key);
                 break;
-
             case 4:
               	printf("Exiting program.\n");
                 exit(0);
-                
-
             default:
                 printf("Invalid choice, please try again.\n");
         }
     }
-
     return 0;
 }
